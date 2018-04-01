@@ -1,2 +1,2 @@
-# divi-telegram-bot
-Telegram bot for Divi
+# divigramalytics
+Bot for tracking Divi's telegram analytics

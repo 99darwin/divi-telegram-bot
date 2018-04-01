@@ -1,0 +1,29 @@
+{
+  "name": "divigramalytics",
+  "version": "0.0.1",
+  "description": "Analytics for the divi telegram channel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/99darwin/divigramalytics.git"
+  },
+  "keywords": [
+    "analytics",
+    "telegram"
+  ],
+  "author": "99darwin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/99darwin/divigramalytics/issues"
+  },
+  "homepage": "https://github.com/99darwin/divigramalytics#readme",
+  "dependencies": {
+    "dedent-js": "^1.0.1",
+    "lodash": "^4.17.5",
+    "nedb-promise": "^2.0.1",
+    "node-telegram-bot-api": "^0.30.0"
+  }
+}
