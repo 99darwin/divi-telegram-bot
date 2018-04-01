@@ -23,7 +23,7 @@ bot.onText(/\/stats/, (msg, err) => {
         response = dedent(
         `Number of messages sent: ${JSON.stringify(responses.messages.length)}
         Number of new users: ${JSON.stringify(responses.users.length)}`);
-    if (responses.messages.length > 0) {
+    if (responses.messages.length > 0 || responses.users.length > 0) {
         bot.sendMessage(chatId, response);
     } else {
         bot.sendMessage(chatId, 'no stats sucka')
@@ -42,6 +42,8 @@ bot.on('new_chat_members', (msg) => {
     const chatId = msg.chat.id, 
         username = msg.new_chat_members[0].username, 
         firstName = msg.new_chat_members[0].first_name;
+    responses.users.push(msg.new_chat_members[0]);
+    console.log(responses.users.length);
     if (!firstName) {
         bot.sendMessage(chatId, `Welcome @${username}!`);
     } else {
