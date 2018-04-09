@@ -86,7 +86,7 @@ bot.onText(/\/help/, (msg, err) => {
     bot.sendMessage(chatId, response);
 });
 
-bot.on('message', (msg) => {
+bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     let content = msg.text.toLowerCase();
 
@@ -131,6 +131,27 @@ bot.on('message', (msg) => {
                     TL;DR: If you have at least 1000 DIVX in non-exchange wallet, you will receive airdrops weekly. We recommend MetaMask or MyEtherWallet.`
                 ));
             break;
+        case content.includes('good bot'):
+            bot.sendMessage(chatId,
+                dedent(
+                    `Thanks!`
+                ));
+        case content.includes('hi helpie'):
+            let userId = msg.from.id;
+            let chatMemberName = [];
+            await bot.getChatMember(chatId, userId).then((res) => {
+                console.log(res);
+                if (!res.first_name) {
+                    chatMemberName.push('@' + res.user.username);
+                } else {
+                    chatMemberName.push(res.user.first_name);
+                }
+            });
+            console.log('the person who sent the message is ',chatMemberName);
+            bot.sendMessage(chatId,
+                await dedent(
+                    `Hey ${chatMemberName}!`
+                ))
     }
 });
 
