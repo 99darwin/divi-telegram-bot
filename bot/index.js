@@ -15,22 +15,25 @@ const testMemberBot = new TelegramBot(testMemberToken, {polling: true});
 
 let responses = {
     messages: [],
-    users: []
+    users: [],
+    members: []
 };
+
+
 
 // handle incoming and outgoing users
 bot.on('message', (msg) => {
+
     if (msg.new_chat_members) {
         console.log(msg.new_chat_members);
         const chatId = msg.chat.id
             username = msg.new_chat_members[0].username, 
             firstName = msg.new_chat_members[0].first_name;
-        responses.users.push(msg.new_chat_members[0]);
         console.log('number of users',responses.users.length);
         if (!firstName) {
-            bot.sendMessage(chatId, `Welcome @${username}!`);
+            bot.sendMessage(chatId, `Welcome @${username}! For a list of commands type /help`);
         } else {
-            bot.sendMessage(chatId, `Welcome ${firstName}!`);
+            bot.sendMessage(chatId, `Welcome ${firstName}! For a list of commands type /help`);
         };
     };
     console.log('before',responses.users)
@@ -43,11 +46,27 @@ bot.on('message', (msg) => {
     };
 });
 
-bot.onText(/\/stats/, (msg, err) => {
-    const chatId = msg.chat.id, 
-        response = dedent(
+bot.onText(/\/stats/, async (msg, err) => {
+    const chatId = msg.chat.id
+    
+    const chatMemberCount = () => {
+        bot.getChatMembersCount(chatId)
+            .then((res) => { 
+                console.log(res);
+                responses.members.push(res);
+            })
+            .catch(err => {
+                if (err) console.log(err);
+            })
+    };
+
+    chatMemberCount();
+
+    const
+        response = await dedent(
         `Number of messages sent: ${JSON.stringify(responses.messages.length)}
-        Number of new users: ${JSON.stringify(responses.users.length)}`);
+        Number of new users: ${JSON.stringify(responses.users.length)}
+        Total number of members: ${responses.members[0]}`);
     if (responses.messages.length > 0 || responses.users.length > 0) {
         bot.sendMessage(chatId, response);
     } else {
@@ -61,7 +80,8 @@ bot.onText(/\/help/, (msg, err) => {
         `Here's a list of commands you can use:
         /help: list of commands
         /stats: basic stats about the chat
-        /`
+        /calculator: check out our rewards calculator
+        /masternodes: learn about our masternodes`
     );
     bot.sendMessage(chatId, response);
 });
@@ -75,12 +95,12 @@ bot.on('message', (msg) => {
         responses.messages.push(msg.text);
         console.log('response.messages:', responses.messages);
     }
-    
+
     switch(true) {
         case content.includes('moon'):
             bot.sendMessage(chatId, 'when mars?')
             break;
-        case content.includes('masternodes'):
+        case content.includes('masternode'):
             bot.sendMessage(chatId, 
                 dedent(
                     `Here are some resources about Divi Masternodes for you to check out: 
@@ -92,7 +112,7 @@ bot.on('message', (msg) => {
                     How Masternodes work for you: https://www.youtube.com/watch?v=rBeosdfeUak`
                 ));
             break;
-        case content.includes('rewards'):
+        case content.includes('reward') || content.includes('return') || content.includes('roi') || content.includes('calculator'):
             bot.sendMessage(chatId, 
                 dedent(`Are you trying to figure out rewards for a specific Masternode tier? Maybe our calculator can help! Find it here: https://diviproject.org/calculator`)
             );
@@ -102,6 +122,13 @@ bot.on('message', (msg) => {
                 dedent(
                     `The MOCCI (pronounced mo-chee), or Master One Click Cloud Installer, is a revolutionary new way to set up DIVI Masternodes at the click of a button. 
                     It will be available with the first release of DIVI's software.`
+                ));
+            break;
+        case content.includes('airdrop'):
+            bot.sendMessage(chatId,
+                dedent(
+                    `Here's some information regarding our airdrops: https://medium.com/diviproject/divx-airdrop-details-bd12d3da539c
+                    TL;DR: If you have at least 1000 DIVX in non-exchange wallet, you will receive airdrops weekly. We recommend MetaMask or MyEtherWallet.`
                 ));
             break;
     }
