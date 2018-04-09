@@ -70,7 +70,7 @@ bot.onText(/\/stats/, async (msg, err) => {
     if (responses.messages.length > 0 || responses.users.length > 0) {
         bot.sendMessage(chatId, response);
     } else {
-        bot.sendMessage(chatId, 'no stats sucka')
+        bot.sendMessage(chatId, `I'm new here and still getting acquainted with your chat, could you try again?`)
     };
 });
 
