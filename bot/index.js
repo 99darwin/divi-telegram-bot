@@ -78,10 +78,11 @@ bot.onText(/\/help/, (msg, err) => {
     const chatId = msg.chat.id;
     let response = dedent(
         `Here's a list of commands you can use:
-        /help: list of commands
-        /stats: basic stats about the chat
+        /help: list of commands (you are here)
         /calculator: check out our rewards calculator
-        /masternodes: learn about our masternodes`
+        /masternodes: learn about our masternodes
+        /mocci: learn what our MOCCI system is all about
+        /airdrops: learn how to participate in our airdrops and how they work`
     );
     bot.sendMessage(chatId, response);
 });
@@ -100,7 +101,7 @@ bot.on('message', async (msg) => {
         case content.includes('moon'):
             bot.sendMessage(chatId, 'when mars?')
             break;
-        case content.includes('masternode'):
+        case content.includes('/masternode'):
             bot.sendMessage(chatId, 
                 dedent(
                     `Here are some resources about Divi Masternodes for you to check out: 
@@ -112,19 +113,19 @@ bot.on('message', async (msg) => {
                     How Masternodes work for you: https://www.youtube.com/watch?v=rBeosdfeUak`
                 ));
             break;
-        case content.includes('reward') || content.includes('return') || content.includes('roi') || content.includes('calculator'):
+        case content.includes('/reward') || content.includes('/return') || content.includes('/roi') || content.includes('/calculator'):
             bot.sendMessage(chatId, 
                 dedent(`Are you trying to figure out rewards for a specific Masternode tier? Maybe our calculator can help! Find it here: https://diviproject.org/calculator`)
             );
             break;
-        case content.includes('mocci'):
+        case content.includes('/mocci'):
             bot.sendMessage(chatId, 
                 dedent(
                     `The MOCCI (pronounced mo-chee), or Master One Click Cloud Installer, is a revolutionary new way to set up DIVI Masternodes at the click of a button. 
                     It will be available with the first release of DIVI's software.`
                 ));
             break;
-        case content.includes('airdrop'):
+        case content.includes('/airdrop'):
             bot.sendMessage(chatId,
                 dedent(
                     `Here's some information regarding our airdrops: https://medium.com/diviproject/divx-airdrop-details-bd12d3da539c
@@ -136,6 +137,7 @@ bot.on('message', async (msg) => {
                 dedent(
                     `Thanks!`
                 ));
+            break;
         case content.includes('hi helpie'):
             let userId = msg.from.id;
             let chatMemberName = [];
@@ -151,7 +153,14 @@ bot.on('message', async (msg) => {
             bot.sendMessage(chatId,
                 await dedent(
                     `Hey ${chatMemberName}!`
-                ))
+                ));
+            break;
+        case content.includes('where\'s helpie'):
+            bot.sendMessage(chatId,
+                dedent(
+                    `I'm right here... try typing /help for a list of commands!`
+                ));
+            break;
     }
 });
 
