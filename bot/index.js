@@ -82,7 +82,8 @@ bot.onText(/\/help/, (msg, err) => {
         /calculator: check out our rewards calculator
         /masternodes: learn about our masternodes
         /mocci: learn what our MOCCI system is all about
-        /airdrops: learn how to participate in our airdrops and how they work`
+        /airdrops: learn how to participate in our airdrops and how they work
+        /wp: read our whitepaper (translations available)`
     );
     bot.sendMessage(chatId, response);
 });
@@ -132,6 +133,20 @@ bot.on('message', async (msg) => {
                     TL;DR: If you have at least 1000 DIVX in non-exchange wallet, you will receive airdrops weekly. We recommend MetaMask or MyEtherWallet.`
                 ));
             break;
+        case content.includes('/whitepaper') || content.includes('/wp'):
+            bot.sendMessage(chatId, 
+                dedent(
+                    `Whitepaper in English: https://goo.gl/UEYqhw
+                    Mini Whitepaper (TL;DR version): https://goo.gl/4Erd3f
+                    
+                    Additional languages available:
+                    Spanish: https://goo.gl/W2eocA
+                    Portuguese: https://goo.gl/3B1noA
+                    Chinese: https://goo.gl/zdPYVn
+                    Russian: https://goo.gl/rG824M
+                    
+                    See an issue with any of our translations? Contact us at info@diviproject.org`
+                ))
         case content.includes('good bot'):
             bot.sendMessage(chatId,
                 dedent(
