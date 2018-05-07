@@ -83,7 +83,8 @@ bot.onText(/\/help/, (msg, err) => {
         /masternodes: learn about our masternodes
         /mocci: learn what our MOCCI system is all about
         /airdrops: learn how to participate in our airdrops and how they work
-        /wp: read our whitepaper (translations available)`
+        /wp: read our whitepaper (translations available)
+        /beta: read about and apply for the main net beta`
     );
     bot.sendMessage(chatId, response);
 });
@@ -174,6 +175,13 @@ bot.on('message', async (msg) => {
             bot.sendMessage(chatId,
                 dedent(
                     `I'm right here... try typing /help for a list of commands!`
+                ));
+            break;
+        case content.includes('/mainnet' || '/beta'):
+            bot.sendMessage(chatId,
+                dedent(
+                    `Our main network beta launches on May 15th, 2018, for advanced users.
+                    To apply: https://goo.gl/7BCQ6m`
                 ));
             break;
     }
