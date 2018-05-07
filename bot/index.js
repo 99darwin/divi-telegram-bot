@@ -177,7 +177,7 @@ bot.on('message', async (msg) => {
                     `I'm right here... try typing /help for a list of commands!`
                 ));
             break;
-        case content.includes('/mainnet' || '/beta'):
+        case content.includes('/mainnet') || content.includes('/beta'):
             bot.sendMessage(chatId,
                 dedent(
                     `Our main network beta launches on May 15th, 2018, for advanced users.
