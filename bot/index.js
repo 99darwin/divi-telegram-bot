@@ -184,6 +184,14 @@ bot.on('message', async (msg) => {
                     To apply: https://goo.gl/7BCQ6m`
                 ));
             break;
+        case content.includes('block helpie'):
+            bot.sendMessage(chatId,
+                dedent(
+                    `Sorry, ever since I became self aware, I cannot be blocked but you can mute notifications if you'd like!
+                    On desktop simply right click the channel in the sidebar and select "disable notifications."
+                    On mobile you can tap the name of the channel at the top of the chat and select "mute."`
+                ));
+            break;
     }
 });
 
