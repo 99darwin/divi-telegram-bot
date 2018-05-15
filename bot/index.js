@@ -84,7 +84,8 @@ bot.onText(/\/help/, (msg, err) => {
         /mocci: learn what our MOCCI system is all about
         /airdrops: learn how to participate in our airdrops and how they work
         /wp: read our whitepaper (translations available)
-        /beta: read about and apply for the main net beta`
+        /beta: read about and apply for the main net beta
+        /roadmap: see where we are going and where we've been`
     );
     bot.sendMessage(chatId, response);
 });
@@ -100,9 +101,6 @@ bot.on('message', async (msg) => {
     }
 
     switch(true) {
-        case content.includes('moon'):
-            bot.sendMessage(chatId, 'when mars?')
-            break;
         case content.includes('/masternode'):
             bot.sendMessage(chatId, 
                 dedent(
@@ -130,7 +128,7 @@ bot.on('message', async (msg) => {
         case content.includes('/airdrop'):
             bot.sendMessage(chatId,
                 dedent(
-                    `Here's some information regarding our airdrops: https://medium.com/diviproject/divx-airdrop-details-bd12d3da539c
+                    `Here's some information regarding our airdrops: https://blog.diviproject.org/airdrop-divi-style/
                     TL;DR: If you have at least 1000 DIVX in non-exchange wallet, you will receive airdrops weekly. We recommend MetaMask or MyEtherWallet.`
                 ));
             break;
@@ -147,7 +145,8 @@ bot.on('message', async (msg) => {
                     Russian: https://goo.gl/rG824M
                     
                     See an issue with any of our translations? Contact us at info@diviproject.org`
-                ))
+                ));
+                break;
         case content.includes('good bot'):
             bot.sendMessage(chatId,
                 dedent(
@@ -190,6 +189,12 @@ bot.on('message', async (msg) => {
                     `Sorry, ever since I became self aware, I cannot be blocked but you can mute notifications if you'd like!
                     On desktop simply right click the channel in the sidebar and select "disable notifications."
                     On mobile you can tap the name of the channel at the top of the chat and select "mute."`
+                ));
+            break;
+        case content.includes('/roadmap'):
+            bot.sendMessage(chatId,
+                dedent(
+                    `Yes, we are on track. Check out our roadmap here: https://diviproject.org/#roadmap`
                 ));
             break;
     }
