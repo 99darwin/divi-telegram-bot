@@ -34,8 +34,8 @@ bot.on('message', async (msg) => {
         case content.includes('/airdrop'):
             bot.sendMessage(chatId,
                 dedent(
-                    `Here's some information regarding our airdrops: https://blog.diviproject.org/airdrop-divi-style/
-                    TL;DR: If you have at least 1000 DIVX in non-exchange wallet, you will receive airdrops weekly. We recommend MetaMask or MyEtherWallet.`
+                    `Divi Airdrops have ended. But those with 10 000+ DIVI (100 DIVX) staked in our ecosystem after launch on the 25th will be eligible for lottery rewards!
+                    Read more here: https://goo.gl/YHjS6r`
                 ));
             break;
         case content.includes('/whitepaper') || content.includes('/wp'):

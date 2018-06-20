@@ -12,6 +12,7 @@ mongoose.connect(
 
 const port = process.env.port || 1450;
 const server = http.createServer(app);
+const routes = require('./db/routes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,8 +26,6 @@ app.use((req, res, next) => {
 });
 
 mongoose.Promise = Promise;
-
-const api = require('./api');
 
 server.listen(port);
 console.log('Server listening on port:', port)
