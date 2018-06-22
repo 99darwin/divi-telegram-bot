@@ -8,7 +8,7 @@ bot.on('message', async (msg) => {
 
     switch(true) {
         case content.includes('/masternode'):
-            bot.sendMessage(chatId, 
+            bot.sendMessage(chatId,
                 dedent(
                     `Here are some resources about Divi Masternodes for you to check out: 
     
@@ -112,7 +112,9 @@ bot.on('message', async (msg) => {
         case content.includes('/kyc'):
             bot.sendMessage(chatId,
                 dedent(
-                    `KYC/AML FAQs: https://goo.gl/wPBKDa`
+                    `How to complete KYC: https://goo.gl/9bLhU3
+                    If you are not instantly verified, your case is being manually reviewed and an email will be sent to you with further deatils within 24 hours.
+                    `
                 ));
             break;
     }
