@@ -113,7 +113,7 @@ bot.on('message', async (msg) => {
             bot.sendMessage(chatId,
                 dedent(
                     `How to complete KYC: https://goo.gl/9bLhU3
-                    If you are not instantly verified, your case is being manually reviewed and an email will be sent to you with further deatils within 24 hours.
+                    If you are not instantly verified, your case is being manually reviewed and an email will be sent to you with further details within 24 hours.
                     `
                 ));
             break;
