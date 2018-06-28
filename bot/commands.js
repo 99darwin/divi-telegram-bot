@@ -14,14 +14,14 @@ bot.on('message', async (msg) => {
     
                     Divi Masternodes explained: https://medium.com/diviproject/divi-masternodes-explained-f1fe24d8dab5
     
-                    Divi Masternode calculator: https://diviproject.org/calculator
+                    Divi Masternode calculator: http://divi-masternode-calculator.herokuapp.com/
     
                     How Masternodes work for you: https://www.youtube.com/watch?v=rBeosdfeUak`
                 ));
             break;
         case content.includes('/reward') || content.includes('/return') || content.includes('/roi') || content.includes('/calculator'):
             bot.sendMessage(chatId, 
-                dedent(`Are you trying to figure out rewards for a specific Masternode tier? Maybe our calculator can help! Find it here: https://diviproject.org/calculator`)
+                dedent(`Are you trying to figure out rewards for a specific Masternode tier? Maybe our calculator can help! Find it here: http://divi-masternode-calculator.herokuapp.com/`)
             );
             break;
         case content.includes('/mocci'):
