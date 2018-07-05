@@ -41,16 +41,8 @@ bot.on('message', async (msg) => {
         case content.includes('/whitepaper') || content.includes('/wp'):
             bot.sendMessage(chatId, 
                 dedent(
-                    `Whitepaper in English: https://goo.gl/UEYqhw
-                    Mini Whitepaper (TL;DR version): https://goo.gl/4Erd3f
-                    
-                    Additional languages available:
-                    Spanish: https://goo.gl/W2eocA
-                    Portuguese: https://goo.gl/3B1noA
-                    Chinese: https://goo.gl/zdPYVn
-                    Russian: https://goo.gl/rG824M
-                    
-                    See an issue with any of our translations? Contact us at info@diviproject.org`
+                    `Whitepaper in English: https://wiki.diviproject.org/whitepaper
+                    Mini Whitepaper (TL;DR version): https://wiki.diviproject.org/lightpaper`
                 ));
                 break;
         case content.includes('good bot'):
@@ -97,24 +89,18 @@ bot.on('message', async (msg) => {
                     On mobile you can tap the name of the channel at the top of the chat and select "mute."`
                 ));
             break;
-        case content.includes('/roadmap'):
-            bot.sendMessage(chatId,
-                dedent(
-                    `Yes, we are on track. Check out our roadmap here: https://diviproject.org/#roadmap`
-                ));
-            break;
-        case content.includes('/launch'):
-            bot.sendMessage(chatId,
-                dedent(
-                    `Launch date and swap info: https://goo.gl/BpBrno`
-                ));
-            break;
         case content.includes('/kyc'):
             bot.sendMessage(chatId,
                 dedent(
                     `How to complete KYC: https://goo.gl/9bLhU3
                     If you are not instantly verified, your case is being manually reviewed and an email will be sent to you with further details within 24 hours.
                     `
+                ));
+            break;
+        case content.includes('/announcements'):
+            bot.sendMessage(chatId,
+                dedent(
+                    `Join our official announcements channel for all the latest updates from the team: https://t.me/diviannouncements`
                 ));
             break;
     }

@@ -29,9 +29,9 @@ bot.on('message', (msg) => {
             firstName = msg.new_chat_members[0].first_name;
         console.log('number of users',responses.users.length);
         if (!firstName) {
-            bot.sendMessage(chatId, `Welcome @${username}! For a list of commands type /help`);
+            bot.sendMessage(chatId, `Welcome @${username}! For a list of commands type /help. For official announcements join: https://t.me/diviannouncements`);
         } else {
-            bot.sendMessage(chatId, `Welcome ${firstName}! For a list of commands type /help`);
+            bot.sendMessage(chatId, `Welcome ${firstName}! For a list of commands type /help. For official announcements join: https://t.me/diviannouncements`);
         };
     };
     for (let i = 0; i < responses.users.length; i++) {
@@ -81,10 +81,8 @@ bot.onText(/\/help/, (msg, err) => {
         /mocci: learn what our MOCCI system is all about
         /airdrops: learn how to participate in our airdrops and how they work
         /wp: read our whitepaper (translations available)
-        /beta: read about and apply for the main net beta
-        /roadmap: see where we are going and where we've been
-        /launch: all info regarding the Divi main net launch
-        /kyc: FAQs about the KYC/AML process required to redeem DIVI for DIVX`
+        /kyc: FAQs about the KYC/AML process required to redeem DIVI for DIVX
+        /announcements: Join our announcements channel`
     );
     bot.sendMessage(chatId, response);
 });
