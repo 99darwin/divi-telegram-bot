@@ -19,6 +19,12 @@ bot.on('message', async (msg) => {
                     How Masternodes work for you: https://www.youtube.com/watch?v=rBeosdfeUak`
                 ));
             break;
+        case content.includes('/rules'):
+            bot.sendMessage(chatId,
+            dedent(
+                `Please read our community guidelines before posting: https://goo.gl/DnX1zG`
+            ));
+        break;
         case content.includes('/reward') || content.includes('/return') || content.includes('/roi') || content.includes('/calculator'):
             bot.sendMessage(chatId, 
                 dedent(`Are you trying to figure out rewards for a specific Masternode tier? Maybe our calculator can help! Find it here: http://divi-masternode-calculator.herokuapp.com/`)
