@@ -29,9 +29,9 @@ bot.on('message', (msg) => {
             firstName = msg.new_chat_members[0].first_name;
         console.log('number of users',responses.users.length);
         if (!firstName) {
-            bot.sendMessage(chatId, `Welcome @${username}! For a list of commands type /help. For official announcements join: https://t.me/diviannouncements`);
+            bot.sendMessage(chatId, `Welcome @${username}! Please read our community guidelines before posting: https://goo.gl/DnX1zG | For a list of commands type /help | For official announcements join: https://t.me/diviannouncements`);
         } else {
-            bot.sendMessage(chatId, `Welcome ${firstName}! For a list of commands type /help. For official announcements join: https://t.me/diviannouncements`);
+            bot.sendMessage(chatId, `Welcome ${firstName}! Please read our community guidelines before posting: https://goo.gl/DnX1zG | For a list of commands type /help | For official announcements join: https://t.me/diviannouncements`);
         };
     };
     for (let i = 0; i < responses.users.length; i++) {
