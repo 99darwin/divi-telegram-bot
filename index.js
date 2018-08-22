@@ -11,11 +11,10 @@ mongoose.connect(
 );
 
 const port = process.env.port || 1450;
-const server = http.createServer(app);
-const routes = require('./db/routes');
+// const routes = require('./db/routes');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
@@ -27,5 +26,9 @@ app.use((req, res, next) => {
 
 mongoose.Promise = Promise;
 
-server.listen(port);
-console.log('Server listening on port:', port)
+require('./api')(app);
+require('./bot/bot');
+
+app.listen(port, () => {
+    console.log('Server listening on port:', port)
+});

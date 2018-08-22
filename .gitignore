@@ -58,8 +58,4 @@ typings/
 .env
 
 config.js
-db 
-commands
-package-lock.json
-messages.js 
 messages.json

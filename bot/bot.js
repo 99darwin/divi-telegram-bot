@@ -13,62 +13,65 @@ const testMemberToken = config.testMemberToken;
 const bot = new TelegramBot(token, {polling: true});
 const testMemberBot = new TelegramBot(testMemberToken, {polling: true});
 
-let responses = {
-    messages: [],
-    users: [],
-    members: []
-};
+// Database
+// const messageLog = require('./messageLog');
+const messageController = require('../db/controllers/messages');
+const userController    = require('../db/controllers/users');
 
 // handle incoming and outgoing users
-bot.on('message', (msg) => {
-
+bot.on('message', async (msg) => {
+    const chatId    = msg.chat.id;
+    let userId      = msg.from.id;
+    let content     = msg.text;
+    // log message
+    await bot.getChatMember(chatId, userId).then((res) => {
+        if (!res.first_name) {
+            messageController.upsertMessage({
+                senderId: msg.from.id,
+                sender: res.user.username || res.user.first_name,
+                message: content
+            });
+        } else {
+            messageController.upsertMessage({
+                sender: res.user.first_name,
+                message: content
+            });
+        }
+    })
+    .then(async () => {
+        await messageController.updateCount({
+            senderId: msg.from.id,
+            $inc: {num_messages_by_sender: 1}
+        });
+    })
+    .catch(err => console.log(err));
+    // welcome new members
     if (msg.new_chat_members) {
         console.log(msg.new_chat_members);
-        const chatId = msg.chat.id
-            username = msg.new_chat_members[0].username, 
-            firstName = msg.new_chat_members[0].first_name;
-        console.log('number of users',responses.users.length);
+        const chatId    = msg.chat.id
+            username    = msg.new_chat_members[0].username, 
+            firstName   = msg.new_chat_members[0].first_name,
+            id          = msg.new_chat_members[0].id;
         if (!firstName) {
             bot.sendMessage(chatId, `Welcome @${username}! Please read our community guidelines before posting: https://goo.gl/DnX1zG | For a list of commands type /help | For official announcements join: https://t.me/diviannouncements`);
+            userController.upsertUser({
+                id: id,
+                username: username
+            });
         } else {
             bot.sendMessage(chatId, `Welcome ${firstName}! Please read our community guidelines before posting: https://goo.gl/DnX1zG | For a list of commands type /help | For official announcements join: https://t.me/diviannouncements`);
+            userController.upsertUser({
+                id       : id,
+                firstName: firstName
+            });
         };
     };
-    for (let i = 0; i < responses.users.length; i++) {
-        if (msg.left_chat_member) {
-            console.log('number of users',responses.users.length);
-            responses.users.splice(responses.users.indexOf(msg.left_chat_member), 1);
-            console.log('after',responses.users);
-        }  
-    };
-});
 
-bot.onText(/\/stats/, async (msg, err) => {
-    const chatId = msg.chat.id
-    
-    const chatMemberCount = () => {
-        bot.getChatMembersCount(chatId)
-            .then((res) => { 
-                console.log(res);
-                responses.members.push(res);
-            })
-            .catch(err => {
-                if (err) console.log(err);
-            })
-    };
+    if (msg.left_chat_member) {
+        console.log('msg.left_chat_member.id', msg.left_chat_member.id);
+        userController.deleteUser({'id': msg.left_chat_member.id});
+    }
 
-    chatMemberCount();
-
-    const
-        response = await dedent(
-        `Number of messages sent: ${JSON.stringify(responses.messages.length)}
-        Number of new users: ${JSON.stringify(responses.users.length)}
-        Total number of members: ${responses.members[0]}`);
-    if (responses.messages.length > 0 || responses.users.length > 0) {
-        bot.sendMessage(chatId, response);
-    } else {
-        bot.sendMessage(chatId, `I'm new here and still getting acquainted with your chat, could you try again?`)
-    };
 });
 
 bot.onText(/\/help/, (msg, err) => {
